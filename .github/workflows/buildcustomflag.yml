@@ -46,7 +46,7 @@ jobs:
         with:
           python-version: "3.11"
 
-      - run: pip install platformio
+      - run: pip install platformio esptool
 
       - name: Prepare FLAGS
         run: |
