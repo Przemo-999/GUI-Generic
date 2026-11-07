@@ -71,10 +71,7 @@ jobs:
 
       - name: Build firmware
         run: |
-          echo "Using flags: $FLAGS"
-          pio run \
-            -e ${{ inputs.environment }} \
-            --project-option="build_flags=${FLAGS}"
+          pio run -e ${{ inputs.environment }}
 
       - name: Copy firmware
         run: |
