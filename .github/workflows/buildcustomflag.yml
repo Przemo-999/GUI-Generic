@@ -73,6 +73,20 @@ jobs:
         run: |
           pio run -e ${{ inputs.environment }}
 
+      - name: Decode crash
+        run: |
+          ~/.platformio/packages/toolchain-xtensa-esp-elf/bin/xtensa-esp-elf-addr2line \
+            -pfiaC \
+            -e .pio/build/GUI_Generic_ESP32/firmware.elf \
+            0x40101b2c \
+            0x40101db1 \
+            0x400ec5a1 \
+            0x400e23ee \
+            0x400e3299 \
+            0x400f64b0 \
+            0x4010b7f0 \
+            0x4008e7e5
+
       - name: Create complete ESP32 firmware
         run: |
           mkdir -p release
