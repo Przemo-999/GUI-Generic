@@ -146,6 +146,9 @@ class ESPETH : public Supla::LAN {
         mdioPin,
         powerPin,
         clkMode);
+    Serial.println("[ETH] Waiting 2 seconds for PHY...");
+    
+    delay(2000);
     ETH.begin(ethType, ethAddress, mdcPin, mdioPin, powerPin, clkMode);
 
     initDone = true;
