@@ -44,7 +44,7 @@ namespace Supla {
 class ESPETH;
 }  // namespace Supla
 
-static Supla::ESPETH *thisEth = nullptr;
+inline Supla::ESPETH *thisEth = nullptr;
 
 namespace Supla {
 class ESPETH : public Supla::LAN {
@@ -139,7 +139,7 @@ class ESPETH : public Supla::LAN {
     SUPLA_LOG_INFO(
         "[%s] setting up ETH (type %d, address %d, mdcPin %d, mdioPin %d, "
         "powerPin %d, clkMode %d)",
-        thisEth->getIntfName(),
+        getIntfName(),
         ethType,
         ethAddress,
         mdcPin,
