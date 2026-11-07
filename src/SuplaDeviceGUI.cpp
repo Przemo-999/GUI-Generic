@@ -51,7 +51,7 @@ void setupConnection() {
   }
 #elif defined(SUPLA_ETH01_LAN8720)
   if (eth == nullptr) {
-    eth = new Supla::GUI_ETH01(1);  // uint_t ETH_ADDR = I²C-address of Ethernet PHY (0 or 1)
+    eth = new Supla::GUI_ETH01(0);  // Olimex ESP32-EVB PHY address 0, clock on GPIO0
     eth->setHostname(suplaHostname.c_str(), 16);
   }
 #else
