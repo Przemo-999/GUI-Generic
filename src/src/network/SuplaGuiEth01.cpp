@@ -22,7 +22,9 @@
 #include "../../SuplaDeviceGUI.h"
 
 namespace Supla {
-GUI_ETH01::GUI_ETH01(uint8_t ethmode) : Supla::ESPETH(ethmode) {
+GUI_ETH01::GUI_ETH01(uint8_t ethmode)
+    : Supla::ESPETH(ETH_PHY_LAN8720, 0, 23, 18, -1, ETH_CLOCK_GPIO0_IN) {
+  (void)ethmode;
 }
 
 void GUI_ETH01::setup() {
