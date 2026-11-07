@@ -73,11 +73,18 @@ jobs:
         run: |
           pio run -e ${{ inputs.environment }}
 
-      - name: Copy firmware
+      - name: Create complete ESP32 firmware
         run: |
           mkdir -p release
-          cp .pio/build/${{ inputs.environment }}/firmware.bin \
-             release/${{ inputs.environment }}.bin
+
+          python -m esptool --chip esp32 merge-bin \
+            -o release/Olimex_SUPLA_FULL.bin \
+            --flash-mode dio \
+            --flash-freq 80m \
+            --flash-size 4MB \
+            0x1000 .pio/build/GUI_Generic_ESP32/bootloader.bin \
+            0x8000 .pio/build/GUI_Generic_ESP32/partitions.bin \
+            0x10000 .pio/build/GUI_Generic_ESP32/firmware.bin
 
       - uses: actions/upload-artifact@v4
         with:
