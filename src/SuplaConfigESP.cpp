@@ -70,7 +70,13 @@ void SuplaConfigESP::addConfigESP(int _pinNumberConfig, int _pinLedConfig) {
     digitalWrite(pinLedConfig, ConfigESP->getLevel(pinLedConfig) ? LOW : HIGH);
   }
 
+  // Olimex ESP32-EVB Ethernet uses GPIO0 as the RMII clock input.
+  // Never configure GPIO0 as a button while wired Ethernet is enabled.
+#if defined(SUPLA_ETH01_LAN8720)
+  if (pinNumberConfig != OFF_GPIO && pinNumberConfig != 0) {
+#else
   if (pinNumberConfig != OFF_GPIO) {
+#endif
     bool pullUp = true, invertLogic = true;
 
     for (uint8_t nr = 0; nr < ConfigManager->get(KEY_MAX_BUTTON)->getValueInt(); nr++) {
